@@ -2,5 +2,11 @@
 
  {%  block content %}
  <h1> voici la page d'accueil du blog </h1>
+ {% for Article in Articles %}
+    <h6>{{Article.title |upper}} </h6>
+    <p> {{Article.description }} </p>
+    <hr>
+    <p>{{Article.content}}
+ {% endfor %}
 
  {% endblock %}

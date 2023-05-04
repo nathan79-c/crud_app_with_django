@@ -1,3 +1,6 @@
 from django.db import models
 
-# Create your models here.
+class Article(models.Model):
+    title = models.fields.CharField(max_length=100)
+    description = models.fields.CharField(max_length=200)
+    content = models.fields.TextField(blank=True)
