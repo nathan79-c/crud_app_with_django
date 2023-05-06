@@ -2,12 +2,38 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from blog.models import Article
 from blog.forms import ContactUsForms
+from django.core.mail import send_mail
+
 
 def index(request):
     Articles = Article.objects.all()
     return render(request,'blog/index.html',{'Articles': Articles})
+#def contact(request):
+    #form = ContactUsForms()
+   # return render(request,'blog/contact.html',{'form':form})
+
+    
 def contact(request):
-    form = ContactUsForms()
-    return render(request,'blog/contact.html',{'form':form})
+
+    # ...nous pouvons supprimer les déclarations de journalisation qui étaient ici...
+
+    if request.method == 'POST':
+        # créer une instance de notre formulaire et le remplir avec les données POST
+        form = ContactUsForms(request.POST)
+
+        if form.is_valid():
+            send_mail(
+            subject=f'Message from {form.cleaned_data["name"] or "anonyme"} via MerchEx Contact Us form',
+            message=form.cleaned_data['message'],
+            from_email=form.cleaned_data['email'],
+            recipient_list=['admin@merchex.xyz'],
+        )
+    else:
+    # ceci doit être une requête GET, donc créer un formulaire vide
+        form = ContactUsForms()
+
+    return render(request,
+            'blog/contact.html',
+            {'form': form})
 
 
