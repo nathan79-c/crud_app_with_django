@@ -1,0 +1,11 @@
+{% extends 'blog/layouts/base.html' %} 
+
+{%  block content %}
+<p> ici je cree des Article</p>
+<form action ="" method="post" novalidate>
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Enregistrer</button>
+</form>
+
+{%  endblock %}

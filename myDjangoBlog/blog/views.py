@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from blog.models import Article
-from blog.forms import ContactUsForms
+from blog.forms import ContactUsForms,ArticleForm
 from django.core.mail import send_mail
+from django.shortcuts import redirect
 
 
 def index(request):
@@ -28,6 +29,7 @@ def contact(request):
             from_email=form.cleaned_data['email'],
             recipient_list=['admin@merchex.xyz'],
         )
+            return redirect('accueil') 
     else:
     # ceci doit être une requête GET, donc créer un formulaire vide
         form = ContactUsForms()
@@ -36,4 +38,7 @@ def contact(request):
             'blog/contact.html',
             {'form': form})
 
+def article_create(request):
+    form = ArticleForm()
+    return render(request,'blog/article_create.html',{'form':form})
 
