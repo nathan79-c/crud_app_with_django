@@ -8,6 +8,6 @@ def index(request):
     return render(request,'blog/index.html',{'Articles': Articles})
 def contact(request):
     form = ContactUsForms()
-    return render(request,'blog/contact.hml',{'form':form})
+    return render(request,'blog/contact.html',{'form':form})
 
 
