@@ -5,6 +5,8 @@
  {% for Article in Articles %}
     <h6>{{Article.title |upper}} </h6>
     <p> {{Article.description }} </p>
+   
+    <a href="{% url 'update_article' Article.id  %}">Modifier</a>
     <hr>
     <p>{{Article.content}}
  {% endfor %}

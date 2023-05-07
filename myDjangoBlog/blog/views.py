@@ -48,3 +48,15 @@ def article_create(request):
 
     return render(request,'blog/article_create.html',{'form':form})
 
+def article_update(request, id):
+    article = Article.objects.get(id=id)
+    if request.method == 'POST':
+         form = ArticleForm(request.POST,instance=article)
+         if form.is_valid():
+             form.save()
+             return redirect('accueil')
+    else:
+             form = ArticleForm(instance=article)
+             
+
+    return render(request,'blog/update.html',{'form':form})
