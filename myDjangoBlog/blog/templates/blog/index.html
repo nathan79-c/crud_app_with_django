@@ -7,6 +7,8 @@
     <p> {{Article.description }} </p>
    
     <a href="{% url 'update_article' Article.id  %}">Modifier</a>
+    <a href="{% url 'delete_article' Article.id  %}">Supprimer</a>
+    
     <hr>
     <p>{{Article.content}}
  {% endfor %}

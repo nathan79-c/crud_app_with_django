@@ -60,3 +60,9 @@ def article_update(request, id):
              
 
     return render(request,'blog/update.html',{'form':form})
+def article_delete(request, id):
+    article = Article.objects.get(id=id)
+    if request.method == 'POST':
+        article.delete()
+        return redirect('accueil')
+    return render(request,'blog/article_delete.html',{'article':article})

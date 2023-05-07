@@ -1,0 +1,12 @@
+{% extends 'blog/layouts/base.html' %} 
+
+{%  block content %}
+<h6> Supprimer l'article </h6>
+<p>Etes-vous sûr de vouloir supprimer l'Article : {{ article.title }} ?</p>
+<form action="" method="post">
+    {% csrf_token%}
+    <input type="submit" value ="Delete">
+</form>
+ 
+
+{% endblock %}
