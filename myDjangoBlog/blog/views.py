@@ -39,6 +39,13 @@ def contact(request):
             {'form': form})
 
 def article_create(request):
-    form = ArticleForm()
+    if request.method == 'POST':
+
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            Article = form.save()
+    else:
+        form = ArticleForm()
+        
     return render(request,'blog/article_create.html',{'form':form})
 
