@@ -16,18 +16,17 @@ def index(request):
     
 def contact(request):
 
-    # ...nous pouvons supprimer les déclarations de journalisation qui étaient ici...
 
     if request.method == 'POST':
-        # créer une instance de notre formulaire et le remplir avec les données POST
+       
         form = ContactUsForms(request.POST)
 
         if form.is_valid():
             send_mail(
-            subject=f'Message from {form.cleaned_data["name"] or "anonyme"} via MerchEx Contact Us form',
+            subject=f'Message from {form.cleaned_data["name"] or "anonyme"} via admin Contact Us form',
             message=form.cleaned_data['message'],
             from_email=form.cleaned_data['email'],
-            recipient_list=['admin@merchex.xyz'],
+            recipient_list=['admin@admin.xyz'],
         )
             return redirect('accueil') 
     else:
@@ -46,6 +45,6 @@ def article_create(request):
             Article = form.save()
     else:
         form = ArticleForm()
-        
+
     return render(request,'blog/article_create.html',{'form':form})
 
