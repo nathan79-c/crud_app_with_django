@@ -2,5 +2,17 @@
 
  {%  block content %}
  <h1> voici la page d'accueil du blog </h1>
+ {% for Article in Articles %}
+    <h6>{{Article.title |upper}} </h6>
+    <p> {{Article.description }} </p>
+   
+    <a href="{% url 'update_article' Article.id  %}">Modifier</a>
+    <a href="{% url 'delete_article' Article.id  %}">Supprimer</a>
+    
+    <hr>
+    <p>{{Article.content}}
+ {% endfor %}
+
+ 
 
  {% endblock %}
