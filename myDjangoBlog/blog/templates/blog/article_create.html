@@ -1,11 +1,11 @@
 {% extends 'blog/layouts/base.html' %} 
 
 {%  block content %}
-<p> ici je cree des Article</p>
-<form action ="" method="post" novalidate>
+<p> {{ "ici je cree des Article"|title }}</p>
+<form action ="" method="post" class="form form-control" novalidate>
     {% csrf_token %}
     {{form.as_p}}
-    <button type="submit">Enregistrer</button>
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
 </form>
 
 {%  endblock %}
