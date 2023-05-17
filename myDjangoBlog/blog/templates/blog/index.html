@@ -1,9 +1,43 @@
  {% extends 'blog/layouts/base.html' %} 
 
- {%  block content %}
- <h1> voici la page d'accueil du blog </h1>
- {% for Article in Articles %}
-    <h6>{{Article.title |upper}} </h6>
+ {% block content %}
+ <h1> {{ "voici la page d'accueil du blog"|title }} </h1>
+
+ <a href="{% url 'blog:add' %}" class="btn btn-success btn-lg">Ajouter un article</a> 
+
+   {% if articles %}
+       
+
+   <table class="table table-hover mt-5">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Titre</th>
+          <th scope="col">Description</th>
+          <th scope="col">Contenu</th>
+          <th scope="col">Option</th>
+        </tr>
+      </thead>
+      <tbody>
+         {% for article in articles %}
+        <tr>
+          <th scope="row">{{article.id}}</th>
+          <td>{{article.title}}</td>
+          <td>{{article.description}}</td>
+          <td>{{article.content}}</td>
+          <td>
+            <a href="{% url 'blog:delete' article.id %}" class="btn btn-sm btn-danger">X</a>
+            <a href="{% url 'blog:update' article.id %}" class="btn btn-sm btn-success">Update</a>
+         </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+   
+   {% endif %}
+
+ {% comment %} {% for Article in Articles %}
+    <h6>{{Article.title|upper}} </h6>
     <p> {{Article.description }} </p>
    
     <a href="{% url 'update_article' Article.id  %}">Modifier</a>
@@ -11,8 +45,6 @@
     
     <hr>
     <p>{{Article.content}}
- {% endfor %}
-
- 
+ {% endfor %} {% endcomment %}
 
  {% endblock %}

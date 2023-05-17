@@ -8,10 +8,10 @@ from django.shortcuts import redirect
 
 def index(request):
     Articles = Article.objects.all()
-    return render(request,'blog/index.html',{'Articles': Articles})
-#def contact(request):
+    return render(request,'blog/index.html', {'Articles': Articles})
+    #def contact(request):
     #form = ContactUsForms()
-   # return render(request,'blog/contact.html',{'form':form})
+    # return render(request,'blog/contact.html',{'form':form})
 
     
 def contact(request):
@@ -43,6 +43,7 @@ def article_create(request):
         form = ArticleForm(request.POST)
         if form.is_valid():
             Article = form.save()
+        return redirect('accueil')
     else:
         form = ArticleForm()
 
@@ -66,3 +67,18 @@ def article_delete(request, id):
         article.delete()
         return redirect('accueil')
     return render(request,'blog/article_delete.html',{'article':article})
+
+
+from django.views.generic.list import ListView
+
+class ArticleListView(ListView):
+    template_name = 'list.html'
+    model = Article
+    context_object_name = 'article_list'
+    paginate_by = 20  # if pagination is desired
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs) 
+        context['article_list'] = Article.objects.all()
+        context['article_app_list'] = 'Liste de tous les articles'
+        return context
